@@ -25,7 +25,7 @@ async function lambdaTest() {
             let expectedText = `${remaining} of ${total} remaining`
             assert.equal(text, expectedText)
 
-            let item = driver.findElement(By.xpath(`//input[@name="li${i}"]/following-sibling::span`))
+            let item = await driver.findElement(By.xpath(`//input[@name="li${i}"]/following-sibling::span`))
             let itemClass = await item.getAttribute('class')
             assert.equal(itemClass, "done-false")
 

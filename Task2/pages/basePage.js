@@ -7,6 +7,18 @@ class BasePage {
         await driver.get(url);
     }
 
+    async findElement(locator) {
+        return await driver.findElement(locator)
+    }
+
+    async getClassOfElement(locator) {
+        return await driver.findElement(locator).getAttribute('class')
+    }
+
+    async getTextOfElement(locator) {
+        return await driver.findElement(locator).getText()
+    }
+
     async enterText(locator, textToEnter) {
         await driver.findElement(locator).sendKeys(textToEnter);
     }
@@ -24,8 +36,29 @@ class BasePage {
         return await driver.getTitle()
     }
 
+    async saveScreenshot(fileName) {
+        driver.takeScreenshot().then(function(image) {
+            require('fs').writeFileSync("./images/" + fileName, image, 'base64')
+        })
+    }
+
     async waitUntil(condituion) {
         await driver.wait(condituion)
+    }
+
+    async SwitchToNextTab() {
+        let originalTab = await driver.getWindowHandle();
+        const windows = await driver.getAllWindowHandles();
+        
+        windows.forEach(async handle => {
+            if (handle !== originalTab) {
+                await driver.switchTo().window(handle);
+            }
+        });
+    }
+
+    async sleep(milliseconds) {
+        await driver.sleep(milliseconds)
     }
 }
 
