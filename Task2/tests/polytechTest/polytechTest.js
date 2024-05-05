@@ -20,7 +20,7 @@ describe('Тест расписания политеха', async function() {
     })
 
     it('Нажимает на кнопку расписаний', async function() {
-        await page.sleep(1000)
+        // await page.sleep(1000)
         await page.click(page.redirectButtonLocator)
         await page.sleep(1000)
     })
@@ -41,10 +41,15 @@ describe('Тест расписания политеха', async function() {
         await page.sleep(3000)
     })
 
+    // it('Проверяет правильность выделенного дня недели', async function() {
+    //     page.click(page.groupLinkLocator)
+    //     await page.sleep(3000)
+    // })
+
     afterEach(async function() {
         if (this.currentTest.state == 'failed') {
             let dateTime = getNowDateAndTime()
-            let imageFileName = `(${this.test.title})_${dateTime}.jpg`
+            let imageFileName = `${this.currentTest.title}_${dateTime}.jpg`
             await page.saveScreenshot(imageFileName)
         }
     })
