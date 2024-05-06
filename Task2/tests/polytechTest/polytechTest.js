@@ -15,7 +15,7 @@ describe('Тест расписания политеха', async function() {
     })
 
     it('Нажимает на кнопку расписаний', async function() {
-        await page.sleep(1000)
+        // await page.sleep(1000)
         await page.click(page.redirectButtonLocator)
         await page.sleep(1000)
     })
@@ -35,6 +35,7 @@ describe('Тест расписания политеха', async function() {
         page.click(page.groupLinkLocator)
         await page.sleep(3000)
     })
+
 
     it('Сравнивает выделенный день недели с сегодняшним', async function() {
         try {
