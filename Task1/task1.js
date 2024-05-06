@@ -62,7 +62,7 @@ async function lambdaTest() {
         console.log('Все тесты успешно пройдены');
     } catch (err) {
         driver.takeScreenshot().then(function (image) {
-            require('fs').writeFileSync('screenshot_error.png', image, 'base64')
+            require('fs').writeFileSync('./images/task1/screenshot_error.png', image, 'base64')
         })
         console.error('Тест упал по причине ошибки: %s', err)
     } finally {

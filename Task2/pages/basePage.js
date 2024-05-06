@@ -36,9 +36,13 @@ class BasePage {
         return await driver.getTitle()
     }
 
+    async isElementOnPage(locator) {
+        return await driver.findElement(locator).isEmpty()
+    }
+
     async saveScreenshot(fileName) {
         driver.takeScreenshot().then(function(image) {
-            require('fs').writeFileSync("./images/" + fileName, image, 'base64')
+            require('fs').writeFileSync("./images/task2/" + fileName, image, 'base64')
         })
     }
 
