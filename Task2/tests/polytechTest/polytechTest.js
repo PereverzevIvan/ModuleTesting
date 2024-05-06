@@ -1,17 +1,12 @@
 const { before, after, afterEach } = require('mocha')
 const { assert, expect, should} = require('chai')
 const page = require('../../pages/polytech/polytechPage')
+const getNowDateAndTime = require('../../../helpers/currentDateTime')
 
-function getNowDateAndTime() {
+function getCurrentWeekDay() {
     let date = new Date()
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    let seconds = date.getSeconds()
-
-    return `${year}-${month}-${day}_${hours}:${minutes}:${seconds}`
+    let options = { weekday: "long" };
+    return new Intl.DateTimeFormat("ru-RU", options).format(date)
 }
 
 describe('Тест расписания политеха', async function() {
@@ -31,7 +26,7 @@ describe('Тест расписания политеха', async function() {
 
     it('Вводит номер группы в поле', async function() {
         await page.SwitchToNextTab()
-        await page.sleep(1000)
+        await page.sleep(5000)
         await page.enterText(page.scheduleSearchLocator, "221-321")
         await page.sleep(3000)
     })
@@ -41,10 +36,17 @@ describe('Тест расписания политеха', async function() {
         await page.sleep(3000)
     })
 
-    // it('Проверяет правильность выделенного дня недели', async function() {
-    //     page.click(page.groupLinkLocator)
-    //     await page.sleep(3000)
-    // })
+
+    it('Сравнивает выделенный день недели с сегодняшним', async function() {
+        try {
+            let weekDayOnPage = await page.getTextOfElement(page.currentWeekDayLocator)
+            let systemWeekDay = getCurrentWeekDay()
+            expect(weekDayOnPage.toUpperCase()).to.equal(systemWeekDay.toUpperCase())
+        } catch {
+            console.log("На странице нет выделенного дня недели")
+            assert.fail()
+        }
+    })
 
     afterEach(async function() {
         if (this.currentTest.state == 'failed') {

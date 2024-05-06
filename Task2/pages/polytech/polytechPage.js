@@ -26,6 +26,10 @@ class PolytechPage extends BasePage {
         return By.xpath('//div[@id="221-321"]')
     }
 
+    get currentWeekDayLocator() {
+        return By.xpath('//div[contains(@class, "schedule-day_today")]/div[contains(@class, "schedule-day__title")]')
+    }
+
     async waitSeachField() {
         await this.waitUntil(until.elementIsVisible(this.preloaderLocator))
     }

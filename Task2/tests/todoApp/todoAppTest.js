@@ -1,18 +1,7 @@
 const { before, after, afterEach } = require('mocha')
 const { assert, expect, should} = require('chai')
 const page = require('../../pages/todoApp/todoAppPage')
-
-function getNowDateAndTime() {
-    let date = new Date()
-    let day = date.getDate()
-    let month = date.getMonth() + 1
-    let year = date.getFullYear()
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    let seconds = date.getSeconds()
-
-    return `${year}-${month}-${day}_${hours}:${minutes}:${seconds}`
-}
+const getNowDateAndTime = require('../../../helpers/currentDateTime')
 
 describe('Todo Sample Tests', async function() {
     before(async function() {
@@ -78,7 +67,7 @@ describe('Todo Sample Tests', async function() {
     afterEach(async function() {
         if (this.currentTest.state == 'failed') {
             let dateTime = getNowDateAndTime()
-            let imageFileName = this.test.parent.title + "_" + dateTime + '.jpg'
+            let imageFileName = `${this.currentTest.title}_${dateTime}.jpg`
             await page.saveScreenshot(imageFileName)
         }
     })
