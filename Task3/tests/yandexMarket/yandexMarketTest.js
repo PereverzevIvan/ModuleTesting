@@ -15,21 +15,21 @@ describe('Тест сайта яндекс маркет', async function() {
         await page.click(page.CatalogButtonLocator)
     })
     
-    it('Наводит курсор на ссылку "Ноутбуки и компьютеры"', async function() {
+    it('Наводит курсор на ссылку Ноутбуки и компьютеры', async function() {
         await page.waitElementLocated(page.LiInUlLocator)
         page.sleep(1000)
         
         await page.click(page.LaptopAndComputerLinkLocator)
     })
 
-    it('Переходит по ссылке "Планшеты"', async function() {
+    it('Переходит по ссылке Планшеты', async function() {
         await page.waitElementLocated(page.TabletLinkLocator)
         await page.sleep(1000)
         
         await page.click(page.TabletLinkLocator)
     })
     
-    it('Нажимает на фильтр "подешевле"', async function() {
+    it('Нажимает на фильтр подешевле', async function() {
         await page.waitElementLocated(page.CheaperFilter)
         await page.sleep(1000)
 
@@ -37,7 +37,7 @@ describe('Тест сайта яндекс маркет', async function() {
         await page.sleep(3000)
     })
 
-    it('Нажимает на фильтр "Samsung"', async function() {
+    it('Нажимает на фильтр Samsung', async function() {
         await page.waitElementLocated(page.SamsungFilter)
         await page.sleep(1000)
         
