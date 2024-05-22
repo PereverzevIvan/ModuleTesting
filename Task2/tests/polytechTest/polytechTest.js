@@ -59,4 +59,4 @@ describe('Тест расписания политеха', async function() {
     after(async function() {
         await page.closeBrowser()
     })
-})
+}) 
